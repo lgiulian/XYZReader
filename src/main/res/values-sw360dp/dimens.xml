@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="settings_advanced_checkbox_margin_start">8dp</dimen>
+    <integer name="settings_advanced_checkbox_column">2</integer>
+    <integer name="settings_advanced_checkbox_column_span">1</integer>
+</resources>
