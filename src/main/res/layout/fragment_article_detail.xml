@@ -1,5 +1,5 @@
 <com.example.xyzreader.ui.DrawInsetsFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/draw_insets_frame_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -39,7 +39,7 @@
                 android:layout_gravity="center_horizontal"
                 android:maxWidth="@dimen/detail_card_max_width"
                 android:background="#fff"
-                tools:elevation="2dp"
+                app:elevation="2dp"
                 android:layout_marginTop="@dimen/detail_card_top_margin">
 
                 <LinearLayout
@@ -92,16 +92,16 @@
         </FrameLayout>
     </com.example.xyzreader.ui.ObservableScrollView>
 
-    <ImageButton android:id="@+id/share_fab"
-        tools:stateListAnimator="@anim/fab_state_list_anim"
-        android:background="@drawable/add_fab_background"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/share_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
         android:layout_gravity="bottom|end"
-        android:layout_marginRight="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        app:pressedTranslationZ="@dimen/fab_press_translation_z"
+        android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_share"
-        tools:elevation="@dimen/fab_elevation"
-        android:contentDescription="@string/action_share" />
+        app:elevation="@dimen/fab_elevation"
+        android:contentDescription="@string/action_share"/>
 
 </com.example.xyzreader.ui.DrawInsetsFrameLayout>
