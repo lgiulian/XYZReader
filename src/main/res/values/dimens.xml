@@ -25,6 +25,7 @@
     <dimen name="intro_activate_button_size">100dp</dimen>
 
     <dimen name="keyline_2">72dp</dimen>
+    <dimen name="actionBarSize">72dp</dimen>
     <dimen name="keyline_2_minus_16dp">56dp</dimen>
 
     <dimen name="tutorial_content_margin">32dp</dimen>
@@ -45,6 +46,8 @@
     <dimen name="widget_scrim_height">160dp</dimen>
 
     <dimen name="settings_advanced_checkbox_margin_start">0dp</dimen>
+    <dimen name="appbar_heigh">112dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
     <integer name="settings_advanced_checkbox_column">0</integer>
     <integer name="settings_advanced_checkbox_column_span">3</integer>
 </resources>
