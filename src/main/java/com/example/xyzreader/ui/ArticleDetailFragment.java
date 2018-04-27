@@ -10,9 +10,12 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.NavUtils;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.graphics.Palette;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.text.method.LinkMovementMethod;
@@ -40,7 +43,7 @@ import java.util.GregorianCalendar;
  * tablets) or a {@link ArticleDetailActivity} on handsets.
  */
 public class ArticleDetailFragment extends Fragment implements
-        LoaderManager.LoaderCallbacks<Cursor> {
+        LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener {
     private static final String TAG = "ArticleDetailFragment";
 
     public static final String ARG_ITEM_ID = "item_id";
@@ -63,6 +66,7 @@ public class ArticleDetailFragment extends Fragment implements
     private SimpleDateFormat outputFormat = new SimpleDateFormat();
     // Most time functions can only handle 1902 - 2037
     private GregorianCalendar START_OF_EPOCH = new GregorianCalendar(2,1,1);
+    private String mTitle;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -116,8 +120,6 @@ public class ArticleDetailFragment extends Fragment implements
         mPhotoView = (ImageView) mRootView.findViewById(R.id.photo);
 
         mStatusBarColorDrawable = new ColorDrawable(0);
-
-        ((CollapsingToolbarLayout)mRootView.findViewById(R.id.collapsing_toolbar_layout)).setTitle("Article Details");
 
         mRootView.findViewById(R.id.share_fab).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,6 +180,9 @@ public class ArticleDetailFragment extends Fragment implements
             return;
         }
 
+        Toolbar toolbar = mRootView.findViewById(R.id.toolbar);
+        toolbar.setNavigationOnClickListener(this);
+
         TextView titleView = (TextView) mRootView.findViewById(R.id.article_title);
         TextView bylineView = (TextView) mRootView.findViewById(R.id.article_byline);
         bylineView.setMovementMethod(new LinkMovementMethod());
@@ -191,6 +196,7 @@ public class ArticleDetailFragment extends Fragment implements
             mRootView.setVisibility(View.VISIBLE);
             mRootView.animate().alpha(1);
             titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
+            mTitle = mCursor.getString(ArticleLoader.Query.TITLE);
             Date publishedDate = parsePublishedDate();
             if (!publishedDate.before(START_OF_EPOCH.getTime())) {
                 bylineView.setText(Html.fromHtml(
@@ -234,9 +240,27 @@ public class ArticleDetailFragment extends Fragment implements
         } else {
             mRootView.setVisibility(View.GONE);
             titleView.setText("N/A");
+            mTitle = "N/A";
             bylineView.setText("N/A" );
             bodyView.setText("N/A");
         }
+
+        AppBarLayout appBar = mRootView.findViewById(R.id.app_bar);
+        appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (Math.abs(verticalOffset)-appBarLayout.getTotalScrollRange() == 0)
+                {
+                    // Collapsed
+                    ((CollapsingToolbarLayout)mRootView.findViewById(R.id.collapsing_toolbar_layout)).setTitle(mTitle);
+                }
+                else
+                {
+                    // Expanded
+                    ((CollapsingToolbarLayout)mRootView.findViewById(R.id.collapsing_toolbar_layout)).setTitle("");
+                }
+            }
+        });
     }
 
     @Override
@@ -276,5 +300,10 @@ public class ArticleDetailFragment extends Fragment implements
 
         // account for parallax
         return mPhotoView.getHeight() - mScrollY;
+    }
+
+    @Override
+    public void onClick(View v) {
+        NavUtils.navigateUpFromSameTask(getActivity());
     }
 }
