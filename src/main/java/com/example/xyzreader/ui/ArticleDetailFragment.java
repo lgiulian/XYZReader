@@ -54,7 +54,9 @@ public class ArticleDetailFragment extends Fragment implements
     private int mMutedColor = 0xFF333333;
     private ColorDrawable mStatusBarColorDrawable;
 
+    private int mTopInset = 0;
     private ImageView mPhotoView;
+    private int mScrollY = 0;
     private int mStatusBarFullOpacityBottom;
 
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
