@@ -1,6 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -21,8 +20,7 @@
                 android:layout_gravity="center_horizontal"
                 android:maxWidth="@dimen/detail_card_max_width"
                 android:background="#fff"
-                android:elevation="2dp"
-                tools:targetApi="lollipop">
+                android:elevation="2dp">
 
                 <LinearLayout
                     android:id="@+id/meta_bar"
@@ -95,7 +93,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layout_collapseMode="parallax"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop"
+                    android:transitionName="@string/transition_photo"/>
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"

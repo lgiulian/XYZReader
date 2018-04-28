@@ -28,7 +28,7 @@
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="112dp"
+            android:layout_height="@dimen/appbar_height"
             android:background="?colorPrimary"
             app:elevation="@dimen/toolbar_elevation">
 
